@@ -26,7 +26,7 @@ export const userRegister = async (req, res) => {
       name: dbUser.name,
     });
   } catch (error) {
-    res.status(500).json({ message: "Erro ao registrar" });
+    res.status(500).json({ message: "Erro ao registrar: " + error });
   }
 };
 
