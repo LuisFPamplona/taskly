@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 
-const jwt_secret = process.env.JWT_SECRET;
 const prisma = new PrismaClient();
 
 export const createTask = async (req, res) => {
@@ -29,11 +28,10 @@ export const createTask = async (req, res) => {
 
 export const removeTask = async (req, res) => {
   try {
-    const task = req.body;
+    const { taskId } = req.query;
+    console.log(req.query);
     await prisma.task.delete({
-      where: {
-        id: task.id,
-      },
+      where: { id: taskId },
     });
 
     res.status(200).json({ message: "Sucesso ao remover task" });
@@ -82,11 +80,10 @@ export const isTaskDone = async (req, res) => {
 
 export const listUserTask = async (req, res) => {
   try {
-    const user = req.body;
+    const { userId } = req.query;
+
     const tasks = await prisma.task.findMany({
-      where: {
-        userId: user.userId,
-      },
+      where: { userId: userId },
     });
 
     if (!tasks) {

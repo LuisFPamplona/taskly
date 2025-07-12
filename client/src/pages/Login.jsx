@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
-import { loginUser } from "../js/storage/storage";
+import { loginUser } from "../js/storage/userManagment";
 import { useRef } from "react";
 
 export default function Login() {

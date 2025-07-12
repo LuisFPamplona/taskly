@@ -3,7 +3,7 @@ import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { registerUser } from "../js/storage/storage";
+import { registerUser } from "../js/storage/userManagment";
 
 export default function Register() {
   const navigate = useNavigate();
