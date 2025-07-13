@@ -17,47 +17,47 @@ export default function Button({ children, type }) {
     <>
       {type == "default" && (
         <div>
-          <button
-            className={`rounded-2xl transition-all duration-200 bg-blue-500 w-70 md:w-80 h-10 hover:bg-blue-600 text-white hover:cursor-pointer active:scale-99`}
+          <div
+            className={`flex justify-center items-center rounded-2xl transition-all duration-200 bg-blue-500 w-70 md:w-80 h-10 hover:bg-blue-600 text-white hover:cursor-pointer active:scale-99`}
           >
             {children}
-          </button>
+          </div>
         </div>
       )}
       {type == "light" && (
         <div>
-          <button
-            className={`rounded-2xl transition-all duration-200 border border-gray-600 bg-white w-70 md:w-80 h-10 hover:bg-gray-100 text-black hover:cursor-pointer active:scale-99`}
+          <div
+            className={`flex justify-center items-center rounded-2xl transition-all duration-200 border border-gray-600 bg-white w-70 md:w-80 h-10 hover:bg-gray-100 text-black hover:cursor-pointer active:scale-99`}
           >
             {children}
-          </button>
+          </div>
         </div>
       )}
       {type == "dark" && (
         <div>
-          <button
-            className={`rounded-2xl transition-all duration-200  bg-gray-800 w-70 md:w-80 h-10 hover:bg-gray-900 text-white hover:cursor-pointer active:scale-99`}
+          <div
+            className={`flex justify-center items-center rounded-2xl transition-all duration-200  bg-gray-800 w-70 md:w-80 h-10 hover:bg-gray-900 text-white hover:cursor-pointer active:scale-99`}
           >
             {children}
-          </button>
+          </div>
         </div>
       )}
       {type == "warning" && (
         <div>
-          <button
-            className={`rounded-2xl transition-all duration-200  bg-red-500 w-70 md:w-80 h-10 hover:bg-red-600 text-white hover:cursor-pointer active:scale-99`}
+          <div
+            className={`flex justify-center items-center rounded-2xl transition-all duration-200  bg-red-500 w-70 md:w-80 h-10 hover:bg-red-600 text-white hover:cursor-pointer active:scale-99`}
           >
             {children}
-          </button>
+          </div>
         </div>
       )}
       {type == "caution" && (
         <div>
-          <button
-            className={`rounded-2xl transition-all duration-200  bg-orange-500 w-70 md:w-80 h-10 hover:bg-orange-600 text-white hover:cursor-pointer active:scale-99`}
+          <div
+            className={`flex justify-center items-center rounded-2xl transition-all duration-200  bg-orange-500 w-70 md:w-80 h-10 hover:bg-orange-600 text-white hover:cursor-pointer active:scale-99`}
           >
             {children}
-          </button>
+          </div>
         </div>
       )}
     </>

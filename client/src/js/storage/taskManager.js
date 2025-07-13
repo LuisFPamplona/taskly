@@ -54,3 +54,30 @@ export const deleteTask = async (taskId) => {
     console.log(error);
   }
 };
+
+export const createTask = async (userId, taskContent) => {
+  try {
+    const res = await fetch(`${URL}/private/create-task`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: token,
+      },
+      body: JSON.stringify({
+        user: {
+          id: userId,
+        },
+        task: {
+          content: taskContent,
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+        },
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

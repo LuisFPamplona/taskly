@@ -19,10 +19,13 @@ import {
   SquarePen,
   ListFilter,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "../components/Input/Input";
 import { useNavigate } from "react-router-dom";
 import { deleteTask, getTasks, updateTask } from "../js/storage/taskManager";
+import Confirm from "../components/Confirm/Confirm";
+import TaskList from "../components/TaskList/TaskList";
+import CreateTask from "../components/CreateTask/CreateTask";
 
 //criar opacidade no fundo quando abrir a navBar
 
@@ -30,7 +33,11 @@ export default function Home() {
   const [navDisplay, setNavDisplay] = useState("hidden");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [tasks, setTasks] = useState([]);
+
+  const [warning, setWarning] = useState("");
+  const [idToDelete, setIdToDelete] = useState();
+
+  const [createTaskDisplay, setCreateTaskDisplay] = useState("hidden");
 
   let decoded;
 
@@ -41,14 +48,6 @@ export default function Home() {
 
   const userId = decoded.id;
 
-  async function fetchTasks() {
-    const taskList = await getTasks(userId);
-    setTasks(() => {
-      console.log(taskList);
-      return taskList;
-    });
-  }
-
   const editTask = async (taskId) => {
     const newContent = prompt().trim(); //TROCAR PROMPT POR ALERTA NA TELA
     if (!newContent.trim()) {
@@ -56,60 +55,35 @@ export default function Home() {
     }
 
     await updateTask(taskId, newContent);
-
-    fetchTasks();
+    window.location.reload();
   };
 
   const removeTask = async (taskId) => {
-    const confirmDel = confirm("Quer mesmo deletar?");
-    if (confirmDel) {
+    try {
       await deleteTask(taskId);
+      setIdToDelete("");
+      setWarning("hidden");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
     }
-
-    fetchTasks();
   };
 
-  const renderTask = tasks.map((task) => {
-    return (
-      <div key={task.id}>
-        <div className="border mt-2 w-82 h-fit m-auto flex">
-          <div className="w-[5%] bg-green-600">
-            {/* 
-                COR DA PRIORIDADE
-                VERDE -> BAIXA
-                AMARELA -> MEDIA
-                VERMELHA -> ALTA
-                */}
-          </div>
-          <div className="text-center m-auto font-bold p-2">{task.content}</div>
-          <div className="flex flex-col p-2 gap-1 justify-between">
-            <button
-              className=" p-1 hover:scale-105 active:scale-95 transition-all"
-              onClick={() => removeTask(task.id)}
-            >
-              <Trash color="red" />
-            </button>
-            <button
-              className=" p-1 hover:scale-105 active:scale-95 transition-all"
-              onClick={() => editTask(task.id)}
-            >
-              <SquarePen color="orange" />
-            </button>
-            <button className=" p-1 hover:scale-105 active:scale-95 transition-all">
-              <ClipboardCheck color="green" />
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  });
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
   return (
     <>
       <div>
+        <Confirm
+          warning={warning}
+          setWarning={setWarning}
+          idToDelete={idToDelete}
+          removeTask={removeTask}
+        >
+          Desistir dessa tarefa?
+        </Confirm>
+        <CreateTask
+          display={createTaskDisplay}
+          setCreateTaskDisplay={setCreateTaskDisplay}
+        />
         <nav
           className={`${navDisplay} list-none bg-white border-r-2 border-gray-950 text-black w-64  pt-4 h-screen fixed`}
         >
@@ -176,7 +150,10 @@ export default function Home() {
           />
           <h1 className="font-bold text-4xl text-white col-span-2">•TASKLY</h1>
         </header>
-        <section className="mb-16">
+        <section
+          onClick={() => setCreateTaskDisplay("hidden")}
+          className="mb-16 h-screen"
+        >
           <div className="flex justify-center mt-4 border-b pb-2">
             <Input plcHolder={"Buscar tarefa"} />
           </div>
@@ -192,7 +169,12 @@ export default function Home() {
               <ChevronRight />
             </button>
           </div>
-          {renderTask}
+          <TaskList
+            userId={userId}
+            setWarning={setWarning}
+            setIdToDelete={setIdToDelete}
+            editTask={editTask}
+          />
         </section>
         <div
           className="
@@ -200,16 +182,32 @@ export default function Home() {
         "
         >
           <div className="hover:scale-105 active:scale-95 transition-all">
-            <House />
+            <button>
+              <House />
+            </button>
           </div>
           <div className="hover:scale-105 active:scale-95 transition-all">
-            <ListFilter />
+            <button>
+              <ListFilter />
+            </button>
           </div>
           <div className="hover:scale-105 active:scale-95 transition-all">
-            <Plus />
+            <button
+              onClick={() => {
+                if (createTaskDisplay == "") {
+                  setCreateTaskDisplay("hidden");
+                } else {
+                  setCreateTaskDisplay("");
+                }
+              }}
+            >
+              <Plus />
+            </button>
           </div>
           <div className="hover:scale-105 active:scale-95 transition-all">
-            <Calendar />
+            <button>
+              <Calendar />
+            </button>
           </div>
           <div className="hover:scale-105 active:scale-95 transition-all">
             <ChartBarBig />

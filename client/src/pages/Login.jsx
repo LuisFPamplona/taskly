@@ -15,6 +15,8 @@ export default function Login() {
     const res = await loginUser(email, password);
     if (res.sucess) {
       navigate("/home");
+    } else {
+      navigate("/");
     }
   };
   return (
