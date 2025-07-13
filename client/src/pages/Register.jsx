@@ -26,6 +26,7 @@ export default function Register() {
 
       if (res.sucess) {
         console.log(res);
+        navigate("/");
       } else {
         console.log(res);
       }
@@ -33,6 +34,18 @@ export default function Register() {
       console.log(error);
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key == "Enter") {
+      createAccount(
+        nameRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value,
+        confirmRef.current.value
+      );
+    }
+  };
+
   return (
     <>
       <div
@@ -63,7 +76,10 @@ export default function Register() {
           </p>
         </div>
         <div className="flex flex-col items-center gap-32">
-          <div className="w-78 md:w-96 h-fit pt-2 pb-2 border border-gray-400 rounded m-auto mt-6 flex flex-col items-center gap-2">
+          <div
+            onKeyDown={handleKeyDown}
+            className="w-78 md:w-96 h-fit pt-2 pb-2 border border-gray-400 rounded m-auto mt-6 flex flex-col items-center gap-2"
+          >
             <div className="flex items-start w-70 md:w-80">
               <button
                 onClick={() => navigate("/")}

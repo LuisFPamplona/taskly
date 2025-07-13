@@ -11,6 +11,7 @@ export const createTask = async (req, res) => {
       data: {
         content: task.content,
         done: false,
+        priority: task.priority,
         user: {
           connect: {
             id: user.id,
@@ -29,7 +30,6 @@ export const createTask = async (req, res) => {
 export const removeTask = async (req, res) => {
   try {
     const { taskId } = req.query;
-    console.log(req.query);
     await prisma.task.delete({
       where: { id: taskId },
     });

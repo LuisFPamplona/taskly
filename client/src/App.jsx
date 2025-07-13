@@ -1,4 +1,5 @@
 import "./App.css";
+import Create from "./pages/Create";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </Router>
     </>

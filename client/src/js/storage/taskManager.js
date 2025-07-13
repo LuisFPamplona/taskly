@@ -15,7 +15,7 @@ export const getTasks = async (userId) => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -55,7 +55,7 @@ export const deleteTask = async (taskId) => {
   }
 };
 
-export const createTask = async (userId, taskContent) => {
+export const createTask = async (userId, taskContent, taskPriority) => {
   try {
     const res = await fetch(`${URL}/private/create-task`, {
       method: "POST",
@@ -69,6 +69,7 @@ export const createTask = async (userId, taskContent) => {
         },
         task: {
           content: taskContent,
+          priority: taskPriority,
           user: {
             connect: {
               id: userId,

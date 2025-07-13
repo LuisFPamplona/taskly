@@ -19,6 +19,13 @@ export default function Login() {
       navigate("/");
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key == "Enter") {
+      login(emailRef.current.value, passwordRef.current.value);
+    }
+  };
+
   return (
     <>
       <div
@@ -48,7 +55,10 @@ export default function Login() {
             O Taskly te ajuda a manter o seu dia mais organizado e produtivo.
           </p>
         </div>
-        <div className="flex flex-col items-center gap-32">
+        <div
+          onKeyDown={handleKeyDown}
+          className="flex flex-col items-center gap-32"
+        >
           <div className="w-78 md:w-96 h-fit p-4 border border-gray-400 rounded m-auto mt-10 flex flex-col items-center gap-2">
             <Input inputType={"email"} inputRef={emailRef}>
               Email
