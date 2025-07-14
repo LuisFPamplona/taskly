@@ -7,7 +7,7 @@ export default function Navbar() {
     <>
       <div
         className="
-          h-14 w-screen border-t border-gray-600 fixed bg-white bottom-0 grid grid-cols-5 items-center gap-10 pl-8 pr-8
+          h-14 w-screen border-t border-gray-600 fixed bg-white bottom-0 flex items-center justify-between pl-16 pr-16
         "
       >
         <div className="hover:scale-105 active:scale-95 transition-all">
@@ -15,19 +15,9 @@ export default function Navbar() {
             <House />
           </button>
         </div>
-        <div className="hover:scale-105 active:scale-95 transition-all">
-          <button>
-            <ListFilter />
-          </button>
-        </div>
         <div className="scale-150 hover:scale-175 active:scale-145 transition-all">
           <button onClick={() => navigate("/create")}>
             <Plus />
-          </button>
-        </div>
-        <div className="hover:scale-105 active:scale-95 transition-all">
-          <button>
-            <Calendar />
           </button>
         </div>
         <div className="hover:scale-105 active:scale-95 transition-all">

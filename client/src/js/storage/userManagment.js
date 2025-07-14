@@ -23,7 +23,12 @@ export const loginUser = async (email, password) => {
   }
 };
 
-export const registerUser = async (useremail, username, userpassword) => {
+export const registerUser = async (
+  useremail,
+  username,
+  userpassword,
+  userNickname
+) => {
   try {
     const res = await fetch(`${URL}/public/register`, {
       method: "POST",
@@ -33,6 +38,7 @@ export const registerUser = async (useremail, username, userpassword) => {
       body: JSON.stringify({
         email: useremail,
         name: username,
+        nickname: userNickname,
         password: userpassword,
       }),
     });

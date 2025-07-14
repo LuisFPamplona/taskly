@@ -1,15 +1,4 @@
-import {
-  Calendar,
-  House,
-  Plus,
-  ChartBarBig,
-  CalendarRange,
-  ChevronLeft,
-  ChevronRight,
-  ListFilter,
-} from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import TaskList from "../components/TaskList/TaskList";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
@@ -18,7 +7,7 @@ import Navbar from "../components/Navbar/Navbar";
 
 export default function Home() {
   const [navDisplay, setNavDisplay] = useState("hidden");
-  const navigate = useNavigate();
+  const [tasks, setTasks] = useState([]);
   const token = localStorage.getItem("token");
 
   let decoded;
@@ -34,9 +23,13 @@ export default function Home() {
     <>
       <div>
         <Header setNavDisplay={setNavDisplay} />
-        <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+        <Sidebar
+          navDisplay={navDisplay}
+          setNavDisplay={setNavDisplay}
+          tasksAmount={tasks.length}
+        />
         <Filter />
-        <TaskList userId={userId} />
+        <TaskList userId={userId} tasks={tasks} setTasks={setTasks} />
         <Navbar />
       </div>
     </>

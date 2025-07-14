@@ -1,8 +1,20 @@
 import { ArrowLeftFromLine, LogOut, Settings, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidebar({ navDisplay, setNavDisplay }) {
+export default function Sidebar({ navDisplay, setNavDisplay, tasksAmount }) {
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  let decoded;
+
+  if (token) {
+    const payloadBase64 = token.split(".")[1];
+    decoded = JSON.parse(atob(payloadBase64));
+  }
+
+  const nickname = decoded.nickname;
+
   return (
     <>
       <nav
@@ -21,11 +33,11 @@ export default function Sidebar({ navDisplay, setNavDisplay }) {
               <User />
             </div>
             <div className="font-bold pt-1 cursor-pointer mt-2">
-              <p>Luis Pamplona</p>
+              <p>{nickname}</p>
             </div>
             <div className="pt-2 text-sm cursor-pointer mt-2">
               <p>
-                <span className="font-bold">34</span> Tarefas
+                <span className="font-bold">{tasksAmount}</span> Tarefas
               </p>
             </div>
           </div>

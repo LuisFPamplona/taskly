@@ -11,18 +11,25 @@ export default function Register() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmRef = useRef();
+  const nicknameRef = useRef();
 
-  const createAccount = async (name, email, password, confirmPassword) => {
+  const createAccount = async (
+    name,
+    email,
+    nickname,
+    password,
+    confirmPassword
+  ) => {
     try {
-      if (!name || !email || !password || !confirmPassword) {
-        return console.error("Todos os dados devem ser preenchidos");
+      if (!name || !email || !password || !confirmPassword || !nickname) {
+        return console.error("Todos os dados devem ser preenchidos", nickname);
       }
 
       if (password !== confirmPassword) {
         return console.error("Senhas devem ser iguais");
       }
 
-      const res = await registerUser(email, name, password);
+      const res = await registerUser(email, name, password, nickname);
 
       if (res.sucess) {
         console.log(res);
@@ -40,6 +47,7 @@ export default function Register() {
       createAccount(
         nameRef.current.value,
         emailRef.current.value,
+        nicknameRef.current.value,
         passwordRef.current.value,
         confirmRef.current.value
       );
@@ -91,6 +99,9 @@ export default function Register() {
             <Input inputType={"text"} inputRef={nameRef}>
               Nome completo
             </Input>
+            <Input inputType={"text"} inputRef={nicknameRef}>
+              Apelido
+            </Input>
             <Input inputType={"email"} inputRef={emailRef}>
               Email
             </Input>
@@ -105,6 +116,7 @@ export default function Register() {
                 createAccount(
                   nameRef.current.value,
                   emailRef.current.value,
+                  nicknameRef.current.value,
                   passwordRef.current.value,
                   confirmRef.current.value
                 )

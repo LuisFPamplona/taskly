@@ -16,6 +16,7 @@ export const userRegister = async (req, res) => {
       data: {
         email: user.email,
         name: user.name,
+        nickname: user.nickname,
         password: hashPassword,
       },
     });
@@ -24,6 +25,7 @@ export const userRegister = async (req, res) => {
       message: "Usuário cadastrado com sucesso",
       id: dbUser.id,
       name: dbUser.name,
+      nickname: dbUser.nickname,
     });
   } catch (error) {
     res.status(500).json({ message: "Erro ao registrar: " + error });
@@ -50,13 +52,22 @@ export const userLogin = async (req, res) => {
       return res.status(500).json({ message: "Senha invalida" });
     }
 
-    const token = jwt.sign({ id: user.id, name: user.name }, jwt_secret, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: user.id, name: user.name, nickname: user.nickname },
+      jwt_secret,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(200).json({
       token: token,
-      user: { id: user.id, name: user.name, email: user.email },
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        nickname: user.nickname,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: "Erro ao fazer login" });

@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { deleteTask, getTasks } from "../../js/storage/taskManager";
 import { ClipboardCheck, SquarePen, Trash } from "lucide-react";
 
-export default function TaskList({ userId }) {
-  const [tasks, setTasks] = useState([]);
-
+export default function TaskList({ userId, tasks, setTasks }) {
   const taskContentRef = useRef({});
 
   useEffect(() => {
