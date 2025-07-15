@@ -7,7 +7,6 @@ import Navbar from "../components/Navbar/Navbar";
 
 export default function Home({ navDisplay, setNavDisplay }) {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
 
   let decoded;
@@ -37,8 +36,6 @@ export default function Home({ navDisplay, setNavDisplay }) {
           userId={userId}
           tasks={tasks}
           setTasks={setTasks}
-          loading={loading}
-          setLoading={setLoading}
         />
         <Navbar />
       </div>

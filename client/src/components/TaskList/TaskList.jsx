@@ -3,13 +3,7 @@ import { defineDone, deleteTask, getTasks } from "../../js/storage/taskManager";
 import { ClipboardCheck, SquarePen, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function TaskList({
-  userId,
-  tasks,
-  setTasks,
-  setLoading,
-  loading,
-}) {
+export default function TaskList({ userId, tasks, setTasks }) {
   const taskContentRef = useRef({});
   const taskPriorityRef = useRef({});
   const editButtonRef = useRef({});
@@ -19,8 +13,6 @@ export default function TaskList({
   async function fetchTasks() {
     const taskList = await getTasks(userId);
     setTasks(() => taskList);
-
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -142,5 +134,5 @@ export default function TaskList({
     );
   });
 
-  return <>{!loading && <div className="pb-16">{renderTask}</div>}</>;
+  return <>{tasks.length > 0 && <div className="pb-16">{renderTask}</div>}</>;
 }
