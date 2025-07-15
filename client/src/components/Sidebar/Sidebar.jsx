@@ -18,7 +18,7 @@ export default function Sidebar({ navDisplay, setNavDisplay, tasksAmount }) {
   return (
     <>
       <nav
-        className={`${navDisplay} list-none bg-white border-r-2 border-gray-950 text-black w-64  pt-4 h-screen absolute top-0`}
+        className={`${navDisplay} list-none bg-white border-r-2 border-gray-950 text-black w-64  pt-4 h-screen absolute top-0 z-50`}
       >
         <div className="absolute right-2 hover:scale-105 active:scale-95 transition-all">
           <ArrowLeftFromLine onClick={() => setNavDisplay("hidden")} />

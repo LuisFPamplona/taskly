@@ -1,4 +1,13 @@
-export default function Input({ inputType, children, plcHolder, inputRef }) {
+export default function Input({
+  inputType,
+  children,
+  plcHolder,
+  inputRef,
+  inputValue,
+}) {
+  if (!inputValue) {
+    inputValue = "";
+  }
   return (
     <>
       <div>
@@ -7,6 +16,7 @@ export default function Input({ inputType, children, plcHolder, inputRef }) {
           ref={inputRef}
           type={inputType}
           placeholder={plcHolder}
+          defaultValue={inputValue}
           className="border w-70 md:w-80 h-10 p-2 rounded"
         />
       </div>
