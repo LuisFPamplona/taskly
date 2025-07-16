@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import Filter from "../components/Filter/Filter";
 import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import { getTasks } from "../js/storage/taskManager";
 
 export default function Home({ navDisplay, setNavDisplay }) {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +25,14 @@ export default function Home({ navDisplay, setNavDisplay }) {
 
   const userId = decoded.id;
 
+  async function fetchTasks() {
+    const taskList = await getTasks(userId);
+    setTasks(() => {
+      const taskAmount = localStorage.setItem("taskAmount", taskList.length);
+      return taskList;
+    });
+  }
+
   useEffect(() => {
     setNavDisplay("hidden");
   }, []);
@@ -41,9 +50,12 @@ export default function Home({ navDisplay, setNavDisplay }) {
               <Filter />
               <Navbar type={"side"} />
             </div>
-            {tasks.length > 0 && (
-              <TaskList userId={userId} tasks={tasks} setTasks={setTasks} />
-            )}
+            <TaskList
+              userId={userId}
+              tasks={tasks}
+              setTasks={setTasks}
+              fetchTasks={fetchTasks}
+            />
           </div>
           <div></div>
         </div>

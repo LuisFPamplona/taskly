@@ -1,22 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { defineDone, deleteTask, getTasks } from "../../js/storage/taskManager";
+import { defineDone, deleteTask } from "../../js/storage/taskManager";
 import { ClipboardCheck, SquarePen, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function TaskList({ userId, tasks, setTasks }) {
+export default function TaskList({ tasks, fetchTasks, loading }) {
   const taskContentRef = useRef({});
   const taskPriorityRef = useRef({});
   const editButtonRef = useRef({});
-
   const navigate = useNavigate();
-
-  async function fetchTasks() {
-    const taskList = await getTasks(userId);
-    setTasks(() => {
-      const taskAmount = localStorage.setItem("taskAmount", taskList.length);
-      return taskList;
-    });
-  }
 
   useEffect(() => {
     fetchTasks();

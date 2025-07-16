@@ -17,7 +17,7 @@ export default function Navbar({ type }) {
               <House />
             </button>
           </div>
-          <div className="scale-150 hover:scale-175 active:scale-145 transition-all">
+          <div className="bg-black text-white rounded-full p-3 shadow-md text-2xl -mt-5 active:scale-90 transition-all">
             <button onClick={() => navigate("/create")}>
               <Plus />
             </button>
@@ -30,7 +30,10 @@ export default function Navbar({ type }) {
 
       {type && (
         <div className="hidden border-gray-600 w-50 md:flex  items-center justify-center cursor-pointer ">
-          <div className="hover:scale-105 active:scale-95 transition-all w-fit  text-sm border pl-4 pr-4 pt-2  pb-2 rounded-3xl bg-gray-800 text-white font-bold cursor-pointer">
+          <div
+            className="hover:scale-105 active:scale-95 transition-all w-fit  text-sm border pl-4 pr-4 pt-2  pb-2 rounded-3xl bg-gray-800 text-white font-bold cursor-pointer hover:bg-slate-800 hover:text-white shadow-md
+"
+          >
             <button
               className="flex items-center cursor-pointer"
               onClick={() => navigate("/create")}

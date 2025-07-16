@@ -4,6 +4,8 @@ export default function Input({
   plcHolder,
   inputRef,
   inputValue,
+  setPrevContent,
+  newContentInput,
 }) {
   if (!inputValue) {
     inputValue = "";
@@ -13,6 +15,7 @@ export default function Input({
       <div>
         <p className="text-sm">{children}</p>
         <input
+          onChange={() => setPrevContent(newContentInput.current.value)}
           ref={inputRef}
           type={inputType}
           placeholder={plcHolder}
