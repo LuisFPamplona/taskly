@@ -41,7 +41,9 @@ export default function Home({ navDisplay, setNavDisplay }) {
               <Filter />
               <Navbar type={"side"} />
             </div>
-            <TaskList userId={userId} tasks={tasks} setTasks={setTasks} />
+            {tasks.length > 0 && (
+              <TaskList userId={userId} tasks={tasks} setTasks={setTasks} />
+            )}
           </div>
           <div></div>
         </div>
