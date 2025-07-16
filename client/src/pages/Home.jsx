@@ -4,16 +4,22 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
 import Filter from "../components/Filter/Filter";
 import Navbar from "../components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function Home({ navDisplay, setNavDisplay }) {
   const [tasks, setTasks] = useState([]);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   let decoded;
 
   if (token) {
     const payloadBase64 = token.split(".")[1];
     decoded = JSON.parse(atob(payloadBase64));
+  }
+
+  if (!token) {
+    navigate("/");
   }
 
   const userId = decoded.id;

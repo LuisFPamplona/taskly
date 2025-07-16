@@ -28,6 +28,10 @@ export default function Create() {
     decoded = JSON.parse(atob(payloadBase64));
   }
 
+  if (!token) {
+    navigate("/");
+  }
+
   const userId = decoded.id;
 
   const createNewTask = async () => {

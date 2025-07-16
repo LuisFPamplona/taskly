@@ -10,6 +10,11 @@ import Button from "../components/Button/Button";
 
 export default function Edit({ setNavDisplay, navDisplay }) {
   const id = localStorage.getItem("editId");
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    navigate("/");
+  }
 
   const navigate = useNavigate();
 
