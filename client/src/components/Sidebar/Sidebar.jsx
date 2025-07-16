@@ -1,10 +1,18 @@
-import { ArrowLeftFromLine, LogOut, Settings, User } from "lucide-react";
+import {
+  ArrowLeftFromLine,
+  ChartBarBig,
+  House,
+  LogOut,
+  Settings,
+  User,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidebar({ navDisplay, setNavDisplay, tasksAmount }) {
+export default function Sidebar({ navDisplay, setNavDisplay }) {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const tasksAmount = localStorage.getItem("taskAmount");
 
   let decoded;
 
@@ -18,9 +26,12 @@ export default function Sidebar({ navDisplay, setNavDisplay, tasksAmount }) {
   return (
     <>
       <nav
-        className={`${navDisplay} list-none bg-white border-r-2 border-gray-950 text-black w-64  pt-4 h-screen absolute top-0 z-50`}
+        className={`
+          ${navDisplay} md:block list-none bg-white border-r-2 border-gray-950 text-black w-64  pt-4 h-screen absolute top-0 z-50
+          md:static
+          `}
       >
-        <div className="absolute right-2 hover:scale-105 active:scale-95 transition-all">
+        <div className="absolute md:hidden right-2 hover:scale-105 active:scale-95 transition-all">
           <ArrowLeftFromLine onClick={() => setNavDisplay("hidden")} />
         </div>
         <div
@@ -43,14 +54,35 @@ export default function Sidebar({ navDisplay, setNavDisplay, tasksAmount }) {
           </div>
           <div className="font-bold border-t">
             <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
-              <User />
-              <p className="w-46 underline-offset-4 underline pl-4">Perfil</p>
+              <button
+                className="flex text-left"
+                onClick={() => navigate("/home")}
+              >
+                <House />
+                <p className="w-46 underline-offset-4 underline pl-4">Home</p>
+              </button>
             </li>
             <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
-              <Settings />
-              <p className="w-46 underline-offset-4 underline pl-4">
-                Configuraçoes
-              </p>
+              <button className="flex text-left">
+                <User />
+                <p className="w-46 underline-offset-4 underline pl-4">Perfil</p>
+              </button>
+            </li>
+            <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
+              <button className="flex text-left">
+                <ChartBarBig />
+                <p className="w-46 underline-offset-4 underline pl-4">
+                  Estatísticas
+                </p>
+              </button>
+            </li>
+            <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
+              <button className="flex text-left">
+                <Settings />
+                <p className="w-46 underline-offset-4 underline pl-4">
+                  Configuraçoes
+                </p>
+              </button>
             </li>
           </div>
           <div

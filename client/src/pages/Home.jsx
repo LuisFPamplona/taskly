@@ -26,18 +26,22 @@ export default function Home({ navDisplay, setNavDisplay }) {
     <>
       <div>
         <Header setNavDisplay={setNavDisplay} />
-        <Sidebar
-          navDisplay={navDisplay}
-          setNavDisplay={setNavDisplay}
-          tasksAmount={tasks.length}
-        />
-        <Filter />
-        <TaskList
-          userId={userId}
-          tasks={tasks}
-          setTasks={setTasks}
-        />
-        <Navbar />
+        <div className="md:flex md:justify-between">
+          <div>
+            <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="flex justify-center mt-4 md:mt-12 md:mb-12  w-full">
+              <Filter />
+              <Navbar type={"side"} />
+            </div>
+            <TaskList userId={userId} tasks={tasks} setTasks={setTasks} />
+          </div>
+          <div></div>
+        </div>
+        <div className="md:hidden">
+          <Navbar />
+        </div>
       </div>
     </>
   );

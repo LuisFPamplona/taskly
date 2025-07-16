@@ -12,7 +12,10 @@ export default function TaskList({ userId, tasks, setTasks }) {
 
   async function fetchTasks() {
     const taskList = await getTasks(userId);
-    setTasks(() => taskList);
+    setTasks(() => {
+      const taskAmount = localStorage.setItem("taskAmount", taskList.length);
+      return taskList;
+    });
   }
 
   useEffect(() => {
@@ -134,5 +137,13 @@ export default function TaskList({ userId, tasks, setTasks }) {
     );
   });
 
-  return <>{tasks.length > 0 && <div className="pb-16">{renderTask}</div>}</>;
+  return (
+    <>
+      {tasks.length > 0 && (
+        <div className="pb-16 flex flex-col sm:flex md:grid lg:grid-cols-2 xl:grid-cols-3 gap-x-2">
+          {renderTask}
+        </div>
+      )}
+    </>
+  );
 }

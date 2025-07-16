@@ -63,69 +63,73 @@ export default function Edit({ setNavDisplay, navDisplay }) {
   return (
     <>
       <Header setNavDisplay={setNavDisplay} />
-      <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
-      <section className="flex flex-col items-center gap-4 pt-8 w-82 m-auto">
-        <div className="w-68">
-          <button
-            onClick={() => navigate("/home")}
-            className="flex hover:scale-120 active:scale-95 transition-all"
+      <div className="md:flex md:justify-between">
+        <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+        <section className="flex flex-col items-center gap-4 pt-8 w-82 m-auto md:mt-0">
+          <div className="w-68">
+            <button
+              onClick={() => navigate("/home")}
+              className="flex hover:scale-120 active:scale-95 transition-all"
+            >
+              <ArrowLeftToLine />
+            </button>
+          </div>
+          <div>
+            <h1 className="text-3xl border-t pt-4">Edite sua tarefa</h1>
+          </div>
+          <Input
+            inputRef={newContentInput}
+            plcHolder={"Digite sua tarefa"}
+            inputValue={task.content}
           >
-            <ArrowLeftToLine />
-          </button>
-        </div>
-        <div>
-          <h1 className="text-3xl border-t pt-4">Edite sua tarefa</h1>
-        </div>
-        <Input
-          inputRef={newContentInput}
-          plcHolder={"Digite sua tarefa"}
-          inputValue={task.content}
-        >
-          Tarefa a ser editada:
-        </Input>
-        <div>
-          <h1 className="text-[16pt]">Prioridade da tarefa</h1>
-          <div className="flex gap-4 justify-center border-b pb-4">
-            <div className="flex flex-col items-center justify-center ">
-              <p className="text-teal-700 font-bold">Baixa</p>
-              <input
-                ref={lowPriorityCheckbox}
-                onClick={() => {
-                  highPriorityCheckbox.current.checked = false;
-                  mediumPriorityCheckbox.current.checked = false;
-                }}
-                type="checkbox"
-              />
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <p className="text-yellow-700 font-bold">Média</p>
-              <input
-                ref={mediumPriorityCheckbox}
-                onClick={() => {
-                  highPriorityCheckbox.current.checked = false;
-                  lowPriorityCheckbox.current.checked = false;
-                }}
-                type="checkbox"
-              />
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <p className="text-red-800 font-bold">Alta</p>
-              <input
-                ref={highPriorityCheckbox}
-                onClick={() => {
-                  lowPriorityCheckbox.current.checked = false;
-                  mediumPriorityCheckbox.current.checked = false;
-                }}
-                type="checkbox"
-              />
+            Tarefa a ser editada:
+          </Input>
+          <div>
+            <h1 className="text-[16pt]">Prioridade da tarefa</h1>
+            <div className="flex gap-4 justify-center border-b pb-4">
+              <div className="flex flex-col items-center justify-center ">
+                <p className="text-teal-700 font-bold">Baixa</p>
+                <input
+                  ref={lowPriorityCheckbox}
+                  onClick={() => {
+                    highPriorityCheckbox.current.checked = false;
+                    mediumPriorityCheckbox.current.checked = false;
+                  }}
+                  type="checkbox"
+                />
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-yellow-700 font-bold">Média</p>
+                <input
+                  ref={mediumPriorityCheckbox}
+                  onClick={() => {
+                    highPriorityCheckbox.current.checked = false;
+                    lowPriorityCheckbox.current.checked = false;
+                  }}
+                  type="checkbox"
+                />
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-red-800 font-bold">Alta</p>
+                <input
+                  ref={highPriorityCheckbox}
+                  onClick={() => {
+                    lowPriorityCheckbox.current.checked = false;
+                    mediumPriorityCheckbox.current.checked = false;
+                  }}
+                  type="checkbox"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <button onClick={editTaskHandler}>
-          <Button>Confirmar</Button>
-        </button>
-      </section>
-      <Navbar />
+          <button onClick={editTaskHandler}>
+            <Button>Confirmar</Button>
+          </button>
+        </section>
+      </div>
+      <div className="md:hidden">
+        <Navbar />
+      </div>
     </>
   );
 }
