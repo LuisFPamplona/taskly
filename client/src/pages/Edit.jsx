@@ -33,7 +33,7 @@ export default function Edit({ setNavDisplay, navDisplay }) {
 
   const newContentInput = useRef();
   const fetchTask = async () => {
-    const res = await findTask(id);
+    const res = await findTask(id, token);
 
     setTask(() => {
       setPrevContent(res.content);
@@ -70,7 +70,7 @@ export default function Edit({ setNavDisplay, navDisplay }) {
     if (lowPriorityCheckbox.current.checked) {
       priority = 1;
     }
-    const res = await updateTask(id, content, priority);
+    const res = await updateTask(id, content, priority, token);
     navigate("/home");
   };
 

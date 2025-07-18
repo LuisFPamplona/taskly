@@ -9,13 +9,15 @@ export default function TaskList({ tasks, fetchTasks, loading }) {
   const editButtonRef = useRef({});
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
   const removeHandler = async (taskId) => {
     try {
-      await deleteTask(taskId);
+      await deleteTask(taskId, token);
       fetchTasks();
     } catch (error) {
       console.error(error);

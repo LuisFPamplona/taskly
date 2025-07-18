@@ -1,8 +1,6 @@
 const URL = "http://localhost:3000";
 
-const token = localStorage.getItem("token");
-
-export const getTasks = async (userId) => {
+export const getTasks = async (userId, token) => {
   try {
     const res = await fetch(`${URL}/private/taskList?userId=${userId}`, {
       method: "GET",
@@ -19,7 +17,7 @@ export const getTasks = async (userId) => {
   }
 };
 
-export const updateTask = async (taskId, newContent, newPriority) => {
+export const updateTask = async (taskId, newContent, newPriority, token) => {
   try {
     const res = await fetch(`${URL}/private/update-task`, {
       method: "PATCH",
@@ -38,7 +36,7 @@ export const updateTask = async (taskId, newContent, newPriority) => {
   }
 };
 
-export const deleteTask = async (taskId) => {
+export const deleteTask = async (taskId, token) => {
   try {
     const res = await fetch(`${URL}/private/remove-task?taskId=${taskId}`, {
       method: "DELETE",
@@ -52,7 +50,7 @@ export const deleteTask = async (taskId) => {
   }
 };
 
-export const createTask = async (userId, taskContent, taskPriority) => {
+export const createTask = async (userId, taskContent, taskPriority, token) => {
   try {
     const res = await fetch(`${URL}/private/create-task`, {
       method: "POST",
@@ -80,7 +78,7 @@ export const createTask = async (userId, taskContent, taskPriority) => {
   }
 };
 
-export const findTask = async (taskId) => {
+export const findTask = async (taskId, token) => {
   try {
     const res = await fetch(`${URL}/private/find-task?id=${taskId}`, {
       method: "GET",
@@ -97,7 +95,7 @@ export const findTask = async (taskId) => {
   }
 };
 
-export const defineDone = async (taskId, done) => {
+export const defineDone = async (taskId, done, token) => {
   try {
     const res = await fetch(`${URL}/private/done-task`, {
       method: "PATCH",

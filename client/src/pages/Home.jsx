@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import TaskList from "../components/TaskList/TaskList";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
@@ -6,9 +6,11 @@ import Filter from "../components/Filter/Filter";
 import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { getTasks } from "../js/storage/taskManager";
+import { LoaderCircle } from "lucide-react";
 
 export default function Home({ navDisplay, setNavDisplay }) {
   const [tasks, setTasks] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -26,16 +28,23 @@ export default function Home({ navDisplay, setNavDisplay }) {
   const userId = decoded.id;
 
   async function fetchTasks() {
-    const taskList = await getTasks(userId);
-    setTasks(() => {
-      const taskAmount = localStorage.setItem("taskAmount", taskList.length);
-      return taskList;
-    });
+    try {
+      const taskList = await getTasks(userId, token);
+      setTasks(() => {
+        const taskAmount = localStorage.setItem("taskAmount", taskList.length);
+        return taskList;
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoaded(true);
+    }
   }
 
   useEffect(() => {
     setNavDisplay("hidden");
-  }, []);
+    fetchTasks();
+  }, [isLoaded]);
 
   return (
     <>
@@ -50,12 +59,23 @@ export default function Home({ navDisplay, setNavDisplay }) {
               <Filter />
               <Navbar type={"side"} />
             </div>
-            <TaskList
-              userId={userId}
-              tasks={tasks}
-              setTasks={setTasks}
-              fetchTasks={fetchTasks}
-            />
+            {isLoaded && (
+              <div>
+                {tasks.length > 0 && (
+                  <TaskList
+                    userId={userId}
+                    tasks={tasks}
+                    setTasks={setTasks}
+                    fetchTasks={fetchTasks}
+                  />
+                )}
+              </div>
+            )}
+            {!isLoaded && (
+              <div className="w-fit animate-spin">
+                <LoaderCircle />
+              </div>
+            )}
           </div>
           <div></div>
         </div>

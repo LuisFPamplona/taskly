@@ -57,7 +57,7 @@ export default function Create() {
       }
 
       if (content.trim() !== "") {
-        await createTask(userId, content, priority);
+        await createTask(userId, content, priority, token);
         navigate("/home");
       }
     } catch (error) {
