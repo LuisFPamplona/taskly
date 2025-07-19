@@ -11,6 +11,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Config from "./pages/Config/Config";
+import Conta from "./pages/Config/Account";
+import Langs from "./pages/Config/Langs";
+import Statistic from "./pages/Statistic";
 
 function App() {
   const [navDisplay, setNavDisplay] = useState("hidden");
@@ -31,6 +35,33 @@ function App() {
             path="/edit"
             element={
               <Edit navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+            }
+          />
+          <Route
+            path="/configs"
+            element={
+              <Config navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+            }
+          />
+          <Route
+            path="/userAccount"
+            element={
+              <Conta navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+            }
+          />
+          <Route
+            path="/language"
+            element={
+              <Langs navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+            }
+          />
+          <Route
+            path="/statistics"
+            element={
+              <Statistic
+                navDisplay={navDisplay}
+                setNavDisplay={setNavDisplay}
+              />
             }
           />
         </Routes>

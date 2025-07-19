@@ -132,7 +132,7 @@ export default function TaskList({ tasks, fetchTasks, loading }) {
 
   return (
     <>
-      <div className="pb-16 flex flex-col sm:flex md:grid lg:grid-cols-2 xl:grid-cols-3 gap-x-2">
+      <div className="pb-16 flex flex-col sm:flex md:grid lg:grid-cols-2 xl:grid-cols-3 gap-x-2 mb-4">
         {renderTask}
       </div>
     </>

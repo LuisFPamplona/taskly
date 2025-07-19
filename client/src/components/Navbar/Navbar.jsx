@@ -1,4 +1,11 @@
-import { Calendar, ChartBarBig, House, ListFilter, Plus } from "lucide-react";
+import {
+  Calendar,
+  ChartBarBig,
+  House,
+  ListFilter,
+  Plus,
+  Share,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar({ type }) {
@@ -17,13 +24,13 @@ export default function Navbar({ type }) {
               <House />
             </button>
           </div>
-          <div className="bg-black text-white rounded-full p-3 shadow-md text-2xl -mt-5 active:scale-90 transition-all">
+          <div className="text-center bg-black text-white rounded-full p-3 shadow-md text-2xl -mt-6 w-14 active:scale-90 transition-all">
             <button onClick={() => navigate("/create")}>
               <Plus />
             </button>
           </div>
           <div className="hover:scale-105 active:scale-95 transition-all">
-            <ChartBarBig />
+            <Share />
           </div>
         </div>
       )}

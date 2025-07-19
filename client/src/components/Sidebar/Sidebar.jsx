@@ -12,7 +12,6 @@ export default function Sidebar({ navDisplay, setNavDisplay }) {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
-  const tasksAmount = localStorage.getItem("taskAmount");
 
   let decoded;
 
@@ -46,11 +45,6 @@ export default function Sidebar({ navDisplay, setNavDisplay }) {
             <div className="font-bold pt-1 cursor-pointer mt-2">
               <p>{nickname}</p>
             </div>
-            <div className="pt-2 text-sm cursor-pointer mt-2">
-              <p>
-                <span className="font-bold">{tasksAmount}</span> Tarefas
-              </p>
-            </div>
           </div>
           <div className="font-bold border-t">
             <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
@@ -62,14 +56,17 @@ export default function Sidebar({ navDisplay, setNavDisplay }) {
                 <p className="w-46 underline-offset-4 underline pl-4">Home</p>
               </button>
             </li>
-            <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
+            {/* <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
               <button className="flex text-left">
                 <User />
                 <p className="w-46 underline-offset-4 underline pl-4">Perfil</p>
               </button>
-            </li>
+            </li> */}
             <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
-              <button className="flex text-left">
+              <button
+                onClick={() => navigate("/statistics")}
+                className="flex text-left"
+              >
                 <ChartBarBig />
                 <p className="w-46 underline-offset-4 underline pl-4">
                   Estatísticas
@@ -77,7 +74,10 @@ export default function Sidebar({ navDisplay, setNavDisplay }) {
               </button>
             </li>
             <li className="pt-6 hover:scale-105 active:scale-95 transition-all flex">
-              <button className="flex text-left">
+              <button
+                onClick={() => navigate("/configs")}
+                className="flex text-left"
+              >
                 <Settings />
                 <p className="w-46 underline-offset-4 underline pl-4">
                   Configuraçoes
