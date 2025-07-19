@@ -80,11 +80,11 @@ export default function TaskList({ tasks, fetchTasks, loading }) {
       try {
         switch (isDone) {
           case true:
-            await defineDone(taskId, !isDone);
+            await defineDone(taskId, !isDone, token);
             await fetchTasks();
             break;
           case false:
-            await defineDone(taskId, !isDone);
+            await defineDone(taskId, !isDone, token);
             await fetchTasks();
             break;
         }
