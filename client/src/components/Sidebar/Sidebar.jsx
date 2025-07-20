@@ -14,13 +14,13 @@ export default function Sidebar({ navDisplay, setNavDisplay }) {
   const token = localStorage.getItem("token");
 
   let decoded;
+  let nickname;
 
   if (token) {
     const payloadBase64 = token.split(".")[1];
     decoded = JSON.parse(atob(payloadBase64));
+    nickname = decoded.nickname;
   }
-
-  const nickname = decoded.nickname;
 
   return (
     <>

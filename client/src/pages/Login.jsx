@@ -84,10 +84,13 @@ export default function Login() {
       </div>
       <footer className="w-screen mt-12 md:fixed md:bottom-0 h-fit md:h-24 border-t border-gray-300 flex md:flex-col items-center justify-center">
         <div className="flex items-center justify-center p-1 gap-4">
-          <a href="https://linkedin.com/in/luis-pamplona-552030310">
+          <a
+            target="_blank"
+            href="https://linkedin.com/in/luis-pamplona-552030310"
+          >
             <img src="src\assets\linkedin.png" alt="Linkedin" />
           </a>
-          <a href="https://github.com/LuisFPamplona">
+          <a target="_blank" href="https://github.com/LuisFPamplona">
             <img src="src\assets\github.png" alt="Github" />
           </a>
         </div>

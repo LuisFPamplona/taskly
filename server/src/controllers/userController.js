@@ -56,7 +56,7 @@ export const userLogin = async (req, res) => {
       { id: user.id, name: user.name, nickname: user.nickname },
       jwt_secret,
       {
-        expiresIn: "1h",
+        expiresIn: "7d",
       }
     );
 

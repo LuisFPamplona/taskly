@@ -1,15 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { defineDone, deleteTask } from "../../js/storage/taskManager";
-import { ClipboardCheck, SquarePen, Trash } from "lucide-react";
+import {
+  BrushCleaning,
+  ClipboardCheck,
+  SquarePen,
+  Trash,
+  Wind,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function TaskList({ tasks, fetchTasks, loading }) {
+export default function TaskList({ tasks, fetchTasks, searchContent }) {
   const taskContentRef = useRef({});
   const taskPriorityRef = useRef({});
   const editButtonRef = useRef({});
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const filteredTasks = tasks.filter((task) =>
+    task.content.toLowerCase().includes(searchContent.toLowerCase().trim())
+  );
 
   useEffect(() => {
     fetchTasks();
@@ -29,7 +38,7 @@ export default function TaskList({ tasks, fetchTasks, loading }) {
     navigate("/edit");
   };
 
-  const renderTask = tasks.map((task) => {
+  const renderTask = filteredTasks.map((task) => {
     if (!taskContentRef.current[task.id]) {
       taskContentRef.current[task.id] = React.createRef();
     }
@@ -132,9 +141,22 @@ export default function TaskList({ tasks, fetchTasks, loading }) {
 
   return (
     <>
-      <div className="pb-16 flex flex-col sm:flex md:grid lg:grid-cols-2 xl:grid-cols-3 gap-x-2 mb-4">
-        {renderTask}
-      </div>
+      {filteredTasks.length > 0 && (
+        <div className="pb-16 flex flex-col sm:flex md:grid lg:grid-cols-2 xl:grid-cols-3 gap-x-2 mb-4">
+          {renderTask}
+        </div>
+      )}
+      {filteredTasks.length == 0 && (
+        <div>
+          <div className="flex flex-col justify-center align-middle items-center gap-4 mt-24">
+            <div className="flex">
+              <BrushCleaning />
+              <Wind />
+            </div>
+            <p className="text-2xl">Está vazio por aqui</p>
+          </div>
+        </div>
+      )}
     </>
   );
 }

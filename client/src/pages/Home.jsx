@@ -6,26 +6,23 @@ import Filter from "../components/Filter/Filter";
 import Navbar from "../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { getTasks } from "../js/storage/taskManager";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, Users } from "lucide-react";
 
-export default function Home({ navDisplay, setNavDisplay }) {
-  const [tasks, setTasks] = useState([]);
+export default function Home({ navDisplay, setNavDisplay, tasks, setTasks }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [searchContent, setSearchContent] = useState("");
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   let decoded;
+  let userId;
 
   if (token) {
     const payloadBase64 = token.split(".")[1];
     decoded = JSON.parse(atob(payloadBase64));
+    userId = decoded.id;
   }
-
-  if (!token) {
-    navigate("/");
-  }
-
-  const userId = decoded.id;
 
   async function fetchTasks() {
     try {
@@ -42,6 +39,11 @@ export default function Home({ navDisplay, setNavDisplay }) {
   }
 
   useEffect(() => {
+    if (!token) {
+      console.log("token error");
+
+      navigate("/");
+    }
     setNavDisplay("hidden");
     fetchTasks();
   }, [isLoaded]);
@@ -56,24 +58,31 @@ export default function Home({ navDisplay, setNavDisplay }) {
           </div>
           <div className="flex flex-col items-center">
             <div className="flex justify-center mt-4 md:mt-12 md:mb-12  w-full">
-              <Filter />
+              <Filter
+                setSearchContent={setSearchContent}
+                searchContent={searchContent}
+              />
               <Navbar type={"side"} />
             </div>
             {isLoaded && (
               <div>
-                {tasks.length > 0 && (
-                  <TaskList
-                    userId={userId}
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    fetchTasks={fetchTasks}
-                  />
-                )}
+                <TaskList
+                  searchContent={searchContent}
+                  userId={userId}
+                  tasks={tasks}
+                  setTasks={setTasks}
+                  fetchTasks={fetchTasks}
+                />
               </div>
             )}
             {!isLoaded && (
-              <div className="w-fit animate-spin">
-                <LoaderCircle />
+              <div className="flex flex-col items-center justify-center">
+                <div className="w-fit animate-spin mt-24">
+                  <LoaderCircle />
+                </div>
+                <div>
+                  <p>Carregando Tarefas...</p>
+                </div>
               </div>
             )}
           </div>

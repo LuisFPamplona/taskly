@@ -15,12 +15,12 @@ export default function Config({ setNavDisplay, navDisplay }) {
     <>
       <div>
         <Header setNavDisplay={setNavDisplay} />
-        <div className="md:flex md:justify-between">
+        <div className="md:flex md:justify-start">
           <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
           <section>
             <div>
-              <div className="h-screen w-72 flex flex-col gap-12">
-                <h1 className="text-2xl flex items-center gap-6 w-screen ml-4 mt-4">
+              <div className="h-screen flex flex-col gap-12 max-w-screen">
+                <h1 className="text-2xl flex items-center gap-6 max-w-screen ml-4 mt-4">
                   <button
                     onClick={() => navigate("/home")}
                     className="p-2 hover:scale-115 active:scale-95 transition-all"
@@ -36,11 +36,6 @@ export default function Config({ setNavDisplay, navDisplay }) {
                       Sua conta <ChevronRight />
                     </li>
                   </button>
-                  {/* <button>
-                    <li className="flex justify-between items-center w-82 h-12 pl-2 hover:bg-gray-200 transition-all">
-                      Privacidade e segurança <ChevronRight />
-                    </li>
-                  </button> */}
                   <button onClick={() => navigate("/language")}>
                     <li className="flex justify-between items-center w-82 h-12 pl-2 hover:bg-gray-200 transition-all">
                       Idiomas <ChevronRight />

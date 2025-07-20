@@ -18,6 +18,8 @@ import Statistic from "./pages/Statistic";
 
 function App() {
   const [navDisplay, setNavDisplay] = useState("hidden");
+  const [tasks, setTasks] = useState([]);
+
   return (
     <>
       <Router>
@@ -27,7 +29,12 @@ function App() {
           <Route
             path="/home"
             element={
-              <Home navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
+              <Home
+                tasks={tasks}
+                setTasks={setTasks}
+                navDisplay={navDisplay}
+                setNavDisplay={setNavDisplay}
+              />
             }
           />
           <Route path="/create" element={<Create />} />
@@ -59,6 +66,7 @@ function App() {
             path="/statistics"
             element={
               <Statistic
+                tasks={tasks}
                 navDisplay={navDisplay}
                 setNavDisplay={setNavDisplay}
               />
