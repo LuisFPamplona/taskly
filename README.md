@@ -8,11 +8,11 @@ Taskly é uma aplicação web full stack para gerenciamento de tarefas com auten
 
 > Interface de Gerenciamento de Tarefas:
 
-<img src='img/previewmobile1.png'>
-<img src='img/previewmobile2.png'>
-<img src='img/previewmobile3.png'>
-<img src='img/previewmobile4.png'>
-<img src='img/previewmobile5.png'>
+<img src='img/previewmobile1.png' width='360px' height='800'>
+<img src='img/previewmobile2.png' width='360px' height='800'>
+<img src='img/previewmobile3.png' width='360px' height='800'>
+<img src='img/previewmobile4.png' width='360px' height='800'>
+<img src='img/previewmobile5.png' width='360px' height='800'>
 
 ## 🚀 Funcionalidades
 
