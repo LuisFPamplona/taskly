@@ -12,8 +12,15 @@ import {
   SquarePen,
   Trash,
 } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Create() {
+  const emptyTask = () =>
+    toast.error("Tarefa não pode ser vazia", {
+      position: "top-center",
+    });
+
+  //------------------------------
   const [navDisplay, setNavDisplay] = useState("hidden");
 
   const navigate = useNavigate();
@@ -54,6 +61,9 @@ export default function Create() {
       }
       if (lowPriorityCheckbox.current.checked) {
         priority = 1;
+      }
+      if (content.trim() == "") {
+        emptyTask();
       }
 
       if (content.trim() !== "") {
@@ -168,6 +178,7 @@ export default function Create() {
       <div className="md:hidden">
         <Navbar />
       </div>
+      <ToastContainer />
     </>
   );
 }

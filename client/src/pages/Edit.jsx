@@ -12,8 +12,15 @@ import {
 } from "lucide-react";
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Edit({ setNavDisplay, navDisplay }) {
+  const emptyTask = () =>
+    toast.error("Tarefa não pode ser vazia", {
+      position: "top-center",
+    });
+
+  //---------------------------------------------------
   const id = localStorage.getItem("editId");
   const token = localStorage.getItem("token");
 
@@ -70,8 +77,14 @@ export default function Edit({ setNavDisplay, navDisplay }) {
     if (lowPriorityCheckbox.current.checked) {
       priority = 1;
     }
-    const res = await updateTask(id, content, priority, token);
-    navigate("/home");
+
+    if (content.trim() == "") {
+      emptyTask();
+    }
+    if (content.trim() !== "") {
+      const res = await updateTask(id, content, priority, token);
+      navigate("/home");
+    }
   };
 
   useEffect(() => {
@@ -173,6 +186,7 @@ export default function Edit({ setNavDisplay, navDisplay }) {
       <div className="md:hidden">
         <Navbar />
       </div>
+      <ToastContainer />
     </>
   );
 }

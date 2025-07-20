@@ -4,8 +4,46 @@ import Input from "../components/Input/Input";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { registerUser } from "../js/storage/userManagment";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
+  const registerError = () =>
+    toast.error("Todos os dados devem ser preenchidos", {
+      position: "top-center",
+    });
+
+  const emailInUse = () =>
+    toast.error("E-mail já cadastrado", {
+      position: "top-center",
+    });
+
+  const nicknameInUse = () =>
+    toast.error("Apelido já utilizado", {
+      position: "top-center",
+    });
+
+  const passwordError = () =>
+    toast.error("As senhas não coincidem", {
+      position: "top-center",
+    });
+
+  const passwordLengthError = () =>
+    toast.warn("Senha deve conter ao menos 8 caracteres", {
+      position: "top-center",
+    });
+
+  const passwordForbiddenChar = () =>
+    toast.warn("Senha não deve conter espaços vazios", {
+      position: "top-center",
+    });
+
+  const registerSucceed = () =>
+    toast.success("Conta criada, redirecionando para o login...", {
+      position: "top-center",
+      autoClose: 3000,
+    });
+
+  //-------------------------------------
   const navigate = useNavigate();
   const nameRef = useRef();
   const emailRef = useRef();
@@ -22,23 +60,38 @@ export default function Register() {
   ) => {
     try {
       if (!name || !email || !password || !confirmPassword || !nickname) {
-        return console.error("Todos os dados devem ser preenchidos", nickname);
+        return registerError();
       }
 
       if (password !== confirmPassword) {
-        return console.error("Senhas devem ser iguais");
+        return passwordError();
+      }
+      if (password.length < 8) {
+        return passwordLengthError();
+      }
+      if (password.includes(" ")) {
+        return passwordForbiddenChar();
       }
 
       const res = await registerUser(email, name, password, nickname);
 
       if (res.sucess) {
-        console.log(res);
-        navigate("/");
+        registerSucceed();
+
+        setTimeout(() => {
+          navigate("/");
+        }, 3200);
       } else {
-        console.log(res);
+        const errorMessage = res.message;
+        if (errorMessage.includes("email")) {
+          emailInUse();
+        }
+        if (errorMessage.includes("nickname")) {
+          nicknameInUse();
+        }
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -144,6 +197,7 @@ export default function Register() {
         </div>
         <p className="text-sm">LuisFPamplona®</p>
       </footer>
+      <ToastContainer />
     </>
   );
 }

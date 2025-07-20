@@ -4,7 +4,15 @@ import Input from "../components/Input/Input";
 import { loginUser } from "../js/storage/userManagment";
 import { useRef } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+
 export default function Login() {
+  const loginError = () =>
+    toast.error("Email ou senha inválidos", {
+      position: "top-center",
+    });
+
+  //--------------------------------
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -16,7 +24,7 @@ export default function Login() {
     if (res.sucess) {
       navigate("/home");
     } else {
-      navigate("/");
+      loginError();
     }
   };
 
@@ -96,6 +104,7 @@ export default function Login() {
         </div>
         <p className="text-sm">LuisFPamplona®</p>
       </footer>
+      <ToastContainer />
     </>
   );
 }
