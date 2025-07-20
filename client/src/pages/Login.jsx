@@ -96,10 +96,10 @@ export default function Login() {
             target="_blank"
             href="https://linkedin.com/in/luis-pamplona-552030310"
           >
-            <img src="src\assets\linkedin.png" alt="Linkedin" />
+            <img src="/linkedin.png" alt="Linkedin" />
           </a>
           <a target="_blank" href="https://github.com/LuisFPamplona">
-            <img src="src\assets\github.png" alt="Github" />
+            <img src="/github.png" alt="Github" />
           </a>
         </div>
         <p className="text-sm">LuisFPamplona®</p>
