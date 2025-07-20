@@ -72,8 +72,8 @@ npm run dev
 
 ## 🌐 Deploy
 
-- Frontend: https://taskly-woad.vercel.app/{:target="_blank"}
-- Backend: https://taskly-1x39.onrender.com{:target="_blank"}
+- Frontend: https://taskly-woad.vercel.app/
+- Backend: https://taskly-1x39.onrender.com
 
 ---
 
