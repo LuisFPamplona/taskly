@@ -1,4 +1,4 @@
-# 📋 Taskly - Gerenciador de Tarefas com Autenticação
+# 📋 Taskly - Gerenciador de Tarefas
 
 Taskly é uma aplicação web full stack para gerenciamento de tarefas com autenticação de usuários. Permite criar, editar, filtrar, marcar como concluídas e deletar tarefas, com estatísticas em tempo real e design responsivo.
 
