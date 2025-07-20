@@ -4,6 +4,22 @@ Taskly é uma aplicação web full stack para gerenciamento de tarefas com auten
 
 ---
 
+## 🖼️ Imagens do Projeto
+
+> Interface de Login:
+
+## ![Login Preview](img/previewmobile1.png)
+
+> Interface de Gerenciamento de Tarefas:
+
+## ![Taskly Preview](img/previewmobile2.png)
+
+## ![Create Task Preview](img/previewmobile3.png)
+
+## ![Edit Task Preview](img/previewmobile4.png)
+
+## ![Statistic Preview](img/previewmobile5.png)
+
 ## 🚀 Funcionalidades
 
 - Registro e login de usuários com autenticação protegida
