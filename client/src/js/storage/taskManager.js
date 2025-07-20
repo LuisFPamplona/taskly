@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000";
+const URL = "https://taskly-1x39.onrender.com";
 
 export const getTasks = async (userId, token) => {
   try {
