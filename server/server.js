@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://taskly-woad.vercel.app/",
+    origin: "https://taskly-woad.vercel.app",
   })
 );
 
