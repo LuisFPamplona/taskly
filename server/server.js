@@ -14,4 +14,4 @@ app.use(
 app.use("/public", publicRoutes);
 app.use("/private", privateRoutes);
 
-app.listen(3000, () => console.log("Listening at http://localhost:3000"));
+app.listen(3000);
