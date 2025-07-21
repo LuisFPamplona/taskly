@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import { loginUser } from "../js/storage/userManagment";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
+import { LoaderCircle } from "lucide-react";
 
 export default function Login() {
   const loginError = () =>
@@ -16,6 +17,8 @@ export default function Login() {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
 
@@ -74,13 +77,27 @@ export default function Login() {
             <Input inputType={"password"} inputRef={passwordRef}>
               Senha
             </Input>
-            <button
-              onClick={() =>
-                login(emailRef.current.value, passwordRef.current.value)
-              }
-            >
-              <Button type={"default"}>Entrar</Button>
-            </button>
+            {!loading && (
+              <button
+                onClick={async () => {
+                  setLoading(true);
+                  await login(
+                    emailRef.current.value,
+                    passwordRef.current.value
+                  );
+                  setLoading(false);
+                }}
+              >
+                <Button type={"default"}>Entrar</Button>
+              </button>
+            )}
+            {loading && (
+              <Button type={"default"}>
+                <div className=" animate-spin">
+                  <LoaderCircle />
+                </div>
+              </Button>
+            )}
             <p className="text-sm hover:cursor-pointer">Esqueceu sua senha?</p>
             <div className="border-t border-gray-400 pt-4 mt-4">
               <button onClick={() => navigate("/cadastro")}>

@@ -86,13 +86,24 @@ export default function TaskList({ tasks, fetchTasks, searchContent }) {
     }
 
     const doneButtonHandler = async (taskId, isDone) => {
+      const taskDiv = taskContentRef.current[task.id].current;
       try {
         switch (isDone) {
           case true:
+            taskDiv.className =
+              "border mt-2 w-82 h-fit m-auto flex transition-all";
+            priorityDiv.className = `w-[5%] ${priorityColor}`;
+            editButton.className =
+              "p-1 hover:scale-105 active:scale-95 transition-all";
             await defineDone(taskId, !isDone, token);
             await fetchTasks();
             break;
           case false:
+            taskDiv.className =
+              "border rounded mt-2 w-82 h-fit m-auto flex scale-90 bg-green-900 text-white transition-all";
+            priorityDiv.className = `hidden w-[5%] ${priorityColor}`;
+            editButton.className =
+              "p-1 hover:scale-105 active:scale-95 transition-all";
             await defineDone(taskId, !isDone, token);
             await fetchTasks();
             break;
