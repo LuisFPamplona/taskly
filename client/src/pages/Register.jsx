@@ -1,8 +1,8 @@
-import { ArrowLeftToLine } from "lucide-react";
+import { ArrowLeftToLine, LoaderCircle } from "lucide-react";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { registerUser } from "../js/storage/userManagment";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -45,6 +45,9 @@ export default function Register() {
 
   //-------------------------------------
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -164,19 +167,30 @@ export default function Register() {
             <Input inputType={"password"} inputRef={confirmRef}>
               Confirme sua senha
             </Input>
-            <button
-              onClick={() =>
-                createAccount(
-                  nameRef.current.value,
-                  emailRef.current.value,
-                  nicknameRef.current.value,
-                  passwordRef.current.value,
-                  confirmRef.current.value
-                )
-              }
-            >
-              <Button type={"default"}>Criar minha conta</Button>
-            </button>
+            {!loading && (
+              <button
+                onClick={async () => {
+                  setLoading(true);
+                  await createAccount(
+                    nameRef.current.value,
+                    emailRef.current.value,
+                    nicknameRef.current.value,
+                    passwordRef.current.value,
+                    confirmRef.current.value
+                  );
+                  setLoading(false);
+                }}
+              >
+                <Button type={"default"}>Criar minha conta</Button>
+              </button>
+            )}
+            {loading && (
+              <Button type={"default"}>
+                <div className=" animate-spin">
+                  <LoaderCircle />
+                </div>
+              </Button>
+            )}
             <button onClick={() => navigate("/")}>
               <p className="text-sm hover:cursor-pointer">Já tem uma conta?</p>
             </button>
