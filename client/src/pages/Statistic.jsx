@@ -44,7 +44,6 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
     setPendAmount(allTasks.length - doneTasks.length);
     setTaskAmount(allTasks.length);
     setDoneAmout(doneTasks.length);
-    setIsLoaded(true);
   };
 
   async function fetchTasks() {
@@ -53,6 +52,8 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
       setTasks(() => taskList);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoaded(true);
     }
   }
 
