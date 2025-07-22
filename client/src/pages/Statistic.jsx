@@ -71,7 +71,8 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
       <div className="md:flex justify-start gap-12">
         <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
         <section className="">
-          <div className="flex flex-col justify-center items-center md:gap-4">
+
+          <div className="flex flex-col justify-center md:gap-4 ">
             <h1 className="text-2xl flex items-center gap-6 w-82  ml-4 mt-4">
               <button
                 onClick={() => navigate("/home")}
@@ -88,8 +89,9 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
               </p>
             </div>
             {isLoaded && (
-              <ul className=" lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-x-70 xl:gap-x-84">
-                <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1">
+
+              <ul className=" lg:grid lg:grid-cols-2 xl:grid-cols-3 ">
+                <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1 ">
                   <div className="flex items-center gap-12 pl-2">
                     <div className="flex justify-center items-center w-12 h-12">
                       <Boxes />

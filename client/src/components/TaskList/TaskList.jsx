@@ -96,7 +96,6 @@ export default function TaskList({ tasks, fetchTasks, searchContent }) {
             editButton.className =
               "p-1 hover:scale-105 active:scale-95 transition-all";
             await defineDone(taskId, !isDone, token);
-            await fetchTasks();
             break;
           case false:
             taskDiv.className =
@@ -105,7 +104,6 @@ export default function TaskList({ tasks, fetchTasks, searchContent }) {
             editButton.className =
               "p-1 hover:scale-105 active:scale-95 transition-all";
             await defineDone(taskId, !isDone, token);
-            await fetchTasks();
             break;
         }
       } catch (error) {
