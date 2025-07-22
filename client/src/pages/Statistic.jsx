@@ -8,6 +8,7 @@ import {
   ChevronRight,
   HeartCrack,
   Key,
+  LoaderCircle,
   Package,
   PackageOpen,
   User,
@@ -43,6 +44,7 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
     setPendAmount(allTasks.length - doneTasks.length);
     setTaskAmount(allTasks.length);
     setDoneAmout(doneTasks.length);
+    setIsLoaded(true);
   };
 
   async function fetchTasks() {
@@ -51,8 +53,6 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
       setTasks(() => taskList);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoaded(true);
     }
   }
 
@@ -71,11 +71,7 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
       <div className="md:flex justify-start gap-12">
         <Sidebar navDisplay={navDisplay} setNavDisplay={setNavDisplay} />
         <section className="">
-<<<<<<< Updated upstream
-          <div className="flex flex-col w-140 justify-center md:gap-4">
-=======
           <div className="flex flex-col justify-center md:gap-4 ">
->>>>>>> Stashed changes
             <h1 className="text-2xl flex items-center gap-6 w-82  ml-4 mt-4">
               <button
                 onClick={() => navigate("/home")}
@@ -91,13 +87,6 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
                 tarefas concluídas.
               </p>
             </div>
-<<<<<<< Updated upstream
-            <ul className=" lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-x-70 xl:gap-x-84">
-              <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1">
-                <div className="flex items-center gap-12 pl-2">
-                  <div className="flex justify-center items-center w-12 h-12">
-                    <Boxes />
-=======
             {isLoaded && (
               <ul className=" lg:grid lg:grid-cols-2 xl:grid-cols-3 ">
                 <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1 ">
@@ -113,49 +102,46 @@ export default function Statistic({ setNavDisplay, navDisplay }) {
                         {taskAmount}
                       </p>
                     </div>
->>>>>>> Stashed changes
                   </div>
-                  <div className="flex">
-                    <p className="font-bold w-32">Total de tarefas</p>
+                </li>
+                <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1">
+                  <div className="flex items-center gap-12 pl-2">
+                    <div className="flex justify-center items-center w-12 h-12">
+                      <PackageOpen />
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold w-32">Total pendentes</p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-2xl text-center border bg-orange-400 w-12">
+                        {pendAmount}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-2xl text-center border bg-white w-12">
-                      {taskAmount}
-                    </p>
+                </li>
+                <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1">
+                  <div className="flex items-center gap-12 pl-2">
+                    <div className="flex justify-center items-center w-12 h-12">
+                      <Package />
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold w-32">Total concluídas</p>
+                    </div>
+                    <div>
+                      <p className="font-bold text-2xl text-center border bg-green-500 w-12">
+                        {doneAmount}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1">
-                <div className="flex items-center gap-12 pl-2">
-                  <div className="flex justify-center items-center w-12 h-12">
-                    <PackageOpen />
-                  </div>
-                  <div className="flex">
-                    <p className="font-bold w-32">Total pendentes</p>
-                  </div>
-                  <div>
-                    <p className="font-bold text-2xl text-center border bg-orange-400 w-12">
-                      {pendAmount}
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li className="flex w-86 h-fit items-center justify-between hover:bg-gray-200 transition-all pt-1 pb-1">
-                <div className="flex items-center gap-12 pl-2">
-                  <div className="flex justify-center items-center w-12 h-12">
-                    <Package />
-                  </div>
-                  <div className="flex">
-                    <p className="font-bold w-32">Total concluídas</p>
-                  </div>
-                  <div>
-                    <p className="font-bold text-2xl text-center border bg-green-500 w-12">
-                      {doneAmount}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            )}
+            {!isLoaded && (
+              <div className="flex flex-col justify-center items-center gap-4 mt-18">
+                <LoaderCircle className="w-12 animate-spin" />
+                <p className="text-sm font-bold">Carregando dados...</p>
+              </div>
+            )}
           </div>
         </section>
       </div>
